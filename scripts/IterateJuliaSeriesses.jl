@@ -5,18 +5,6 @@ using Plots; gr()
 include(srcdir() * "\\Mandelbrot.jl")
 const mandelbrot_series_bound = Mandelbrot.mandelbrot_series_bound
 
-function main()
-	chan = Channel{Number}(10)
-
-	println("starting task...")
-
-	task = @async Mandelbrot.mandelbrot_series(1, 5, chan)
-
-	while !isempty(chan)
-		println(take!(chan))
-	end
-end
-
 const x_limit   = 2
 const y_limit   = 2
 const step_size = 0.0085
@@ -42,7 +30,7 @@ function display_mandelbrot(fn::String, x_range = -x_limit:step_size:x_limit-0.7
 	#readline()
 end
 
-function display_julia(c ::Number, fn::String, x_range=-x_limit:step_size:x_limit, y_range = -y_limit:step_size:y_limit	)
+function display_julia(c ::Number, x_range=-x_limit:step_size:x_limit, y_range = -y_limit:step_size:y_limit	)
 	n_till_escape   = Array{Float32}(undef, 0)
 
 	for x in x_range
@@ -63,10 +51,8 @@ function display_julia(c ::Number, fn::String, x_range=-x_limit:step_size:x_limi
 end
 
 
-GC.gc()
-
 for i in -2:0.01:2
-	display_julia(i, "NoData.tmp")
+	display_julia(i)
 end
 
 println("finished")
