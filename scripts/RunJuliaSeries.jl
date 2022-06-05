@@ -9,23 +9,26 @@ include(srcdir() * "\\Mandelbrot.jl")
 function calc_data(c ,x_range, y_range)
 	n_till_escape = Array{Float32}(undef, 0)
 
+	data_dict = Dict{Tuple{Float64, Float64}, Int32}()
+
 	for x in x_range
 		for y in y_range
 			escapes_after = Mandelbrot.julia_series_bound(c ,x + y*im, 30, 2)
 
-			append!(n_till_escape, escapes_after)
+			data_dict[(x,y)] = escapes_after
+			#append!(n_till_escape, escapes_after)
 		end
 	end
 
-	return n_till_escape
+	return data_dict
 end
 
 function make_sim(d::Dict)
 	@unpack c, x_range, y_range = d
 
-	n_till_escape = calc_data(c, x_range, y_range)
+	data_dict = calc_data(c, x_range, y_range)
 	fullDict = copy(d)
-	fullDict["n_till_escape"] = n_till_escape
+	fullDict["data_dict"] = data_dict
 
 	return fullDict
 end
