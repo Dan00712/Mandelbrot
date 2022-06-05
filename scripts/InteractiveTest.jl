@@ -2,7 +2,7 @@ using DrWatson
 @quickactivate "MandelbrotProperly"
 using Plots; gr()
 
-include("Mandelbrot.jl")
+include(srcdir() * "\\Mandelbrot.jl")
 
 
 function main_loop()
@@ -83,7 +83,7 @@ end
 function save_current_data(series_fun ,args, x_range, y_range)
 	println(args)
 	println(String(args[2]))
-	save_ia(series_fun, datadir("sim", "julia_series") String(args[2]), x_range, y_range)
+	save_ia(series_fun, plotsdir() * "\\" * String(args[2]), x_range, y_range)
 end
 
 function display_ia(series_fun ,x_range, y_range)
