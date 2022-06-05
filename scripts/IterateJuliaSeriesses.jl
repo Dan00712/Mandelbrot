@@ -14,6 +14,7 @@ function display_mandelbrot(fn::String, x_range = -x_limit:step_size:x_limit-0.7
 
 	for x in x_range
 		for y in y_range
+			@debug "at pixel ($(x), $(y))"
 			escapes_after = mandelbrot_series_bound(x + y*im, 30, 2)
 
 			append!(n_till_escape, escapes_after)
@@ -24,10 +25,7 @@ function display_mandelbrot(fn::String, x_range = -x_limit:step_size:x_limit-0.7
 
 	colorData = reshape(n_till_escape, length(y_range), length(x_range))
 	heatmap(x_range, y_range, colorData)
-	#gui()
-
-	savefig(fn)
-	#readline()
+	gui()
 end
 
 function display_julia(c ::Number, x_range=-x_limit:step_size:x_limit, y_range = -y_limit:step_size:y_limit	)
@@ -50,10 +48,10 @@ function display_julia(c ::Number, x_range=-x_limit:step_size:x_limit, y_range =
 	gui()
 end
 
-
+@info "iterating the different julia series"
 for i in -2:0.01:2
 	display_julia(i)
 end
 
-println("finished")
+@info "finished"
 readline()

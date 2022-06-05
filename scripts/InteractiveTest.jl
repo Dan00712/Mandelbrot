@@ -1,6 +1,7 @@
 using DrWatson
 @quickactivate "MandelbrotProperly"
 using Plots; gr()
+using Logging
 
 include(srcdir() * "\\Mandelbrot.jl")
 
@@ -18,6 +19,7 @@ function main_loop()
 		t = readline()
 
 		if(startswith(t, "exit"))
+			@warn "Shutting down"
 			break
 		end
 
@@ -81,34 +83,34 @@ function main_loop()
 end
 
 function save_current_data(series_fun ,args, x_range, y_range)
-	println(args)
-	println(String(args[2]))
+	@debug args
+	@debug String(args[2])
 	save_ia(series_fun, plotsdir() * "\\" * String(args[2]), x_range, y_range)
 end
 
 function display_ia(series_fun ,x_range, y_range)
-	println("calculating manddelbrot series in range of X: $(x_range) and Y: $(y_range)")
+	@info "calculating manddelbrot series in range of X: $(x_range) and Y: $(y_range)"
 	n_till_escape = calc_data(series_fun, x_range, y_range)
 
 	GC.gc()
 
-	println("displaying data in heatmap...")
+	@info "displaying data in heatmap..."
 	colorData = reshape(n_till_escape, length(y_range), length(x_range))
 	plt = heatmap(x_range, y_range, colorData)
 	gui(plt)
 end
 
 function save_ia(series_fun ,filename::String ,x_range, y_range)
-	println("calculating manddelbrot series in range of X: $(x_range) and Y: $(y_range)")
+	@info "calculating manddelbrot series in range of X: $(x_range) and Y: $(y_range)"
 	n_till_escape = calc_data(series_fun, x_range, y_range)
 
 	GC.gc()
 
-	println("rendering data in heatmap...")
+	@info "rendering data in heatmap..."
 	colorData = reshape(n_till_escape, length(y_range), length(x_range))
 	plt = heatmap(x_range, y_range, colorData)
 
-	println("saving fig")
+	@info "saving fig"
 	savefig(plt, filename)
 end
 

@@ -3,6 +3,7 @@ using DrWatson
 
 using UnPack
 using JLD2
+using Logging
 
 include(srcdir() * "\\Mandelbrot.jl")
 
@@ -36,9 +37,12 @@ end
 function collect_and_save_data()
 	dicts = create_dicts()
 	for (i, d) in enumerate(dicts)
+		@degub "getting data in iteration $i"
 		data = make_sim(d)
 
-		wsave(datadir("simulations", "sim_$(i).jld2"), data)
+		f = datadir("simulations", "sim_$(i).jld2")
+		@debug "saving data into file $f"
+		wsave(f, data)
 	end
 end
 
