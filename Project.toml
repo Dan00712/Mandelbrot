@@ -1,6 +1,12 @@
 name = "MandelbrotProperly"
-[compat]
-julia = "1.7.3"
-DrWatson = "2.9.1"
+
 [deps]
 DrWatson = "634d3b9d-ee7a-5ddf-bec9-22491ea816e1"
+JLD2 = "033835bb-8acc-5ee8-8aae-3f567f8a3819"
+Plots = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
+UnPack = "3a884ed6-31ef-47d7-9d2a-63182c4928ed"
+UnicodePlots = "b8865327-cd53-5732-bb35-84acbb429228"
+
+[compat]
+DrWatson = "2.9.1"
+julia = "1.7.3"
