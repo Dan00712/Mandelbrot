@@ -24,8 +24,8 @@ function display_mandelbrot(fn::String, x_range = -x_limit:step_size:x_limit-0.7
 	GC.gc()
 
 	colorData = reshape(n_till_escape, length(y_range), length(x_range))
-	heatmap(x_range, y_range, colorData)
-	gui()
+	plt = heatmap(x_range, y_range, colorData)
+	display(plt)
 end
 
 function display_julia(c ::Number, x_range=-x_limit:step_size:x_limit, y_range = -y_limit:step_size:y_limit	)
@@ -44,8 +44,8 @@ function display_julia(c ::Number, x_range=-x_limit:step_size:x_limit, y_range =
 	colorData = reshape(n_till_escape, length(y_range), length(x_range))
 	
 	
-	heatmap(x_range, y_range, colorData, legend= :none)
-	gui()
+	plt = heatmap(x_range, y_range, colorData, legend= :none)
+	gui(plt)
 end
 
 @info "iterating the different julia series"
