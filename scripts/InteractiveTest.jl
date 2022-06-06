@@ -97,7 +97,7 @@ function display_ia(series_fun ,x_range, y_range)
 	@info "displaying data in heatmap..."
 	colorData = reshape(n_till_escape, length(y_range), length(x_range))
 	plt = heatmap(x_range, y_range, colorData)
-	gui(plt)
+	display(plt)
 end
 
 function save_ia(series_fun ,filename::String ,x_range, y_range)
