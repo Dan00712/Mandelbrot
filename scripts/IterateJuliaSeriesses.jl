@@ -45,7 +45,7 @@ function display_julia(c ::Number, x_range=-x_limit:step_size:x_limit, y_range =
 	
 	
 	plt = heatmap(x_range, y_range, colorData, legend= :none)
-	gui(plt)
+	display(plt)
 end
 
 @info "iterating the different julia series"
