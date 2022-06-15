@@ -2,7 +2,7 @@ using DrWatson
 @quickactivate "MandelbrotProperly"
 using Plots; gr()
 
-include(srcdir() * "\\Mandelbrot.jl")
+include(joinpath(srcdir() , "Mandelbrot.jl"))
 const mandelbrot_series_bound = Mandelbrot.mandelbrot_series_bound
 
 const x_limit   = 2

@@ -1,9 +1,10 @@
 using DrWatson
 @quickactivate "MandelbrotProperly"
 using Plots; gr()
+import GR
 using Logging
 
-include(srcdir() * "\\Mandelbrot.jl")
+include(joinpath(srcdir() , "Mandelbrot.jl"))
 
 
 function mainloop()
@@ -62,7 +63,7 @@ end
 function savecurrentdata(state ,args)
 	@debug args
 	@debug String(args[2])
-	saveinteractive(state, plotsdir() * "\\" * String(args[2]))
+	saveinteractive(state, plotsdir(String(args[2])))
 end
 
 function displayinteractive(state)

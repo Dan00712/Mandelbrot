@@ -5,7 +5,7 @@ using UnPack
 using JLD2
 using Logging
 
-include(srcdir() * "\\Mandelbrot.jl")
+include(joinpath(srcdir() , "Mandelbrot.jl"))
 
 function calc_data(c ,x_range, y_range)
 	n_till_escape = Array{Float32}(undef, 0)
@@ -37,7 +37,7 @@ end
 function collect_and_save_data()
 	dicts = create_dicts()
 	for (i, d) in enumerate(dicts)
-		@degub "getting data in iteration $i"
+		@debug "getting data in iteration $i"
 		data = make_sim(d)
 
 		f = datadir("simulations", "sim_$(i).jld2")
